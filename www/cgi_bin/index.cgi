@@ -1,8 +1,9 @@
 #! /usr/bin/ruby
 
+require 'cgi'
+
 print "Content-Type: text/html; charset=UTF-8\n\n"
 
-require 'cgi'
 
 print <<EOF 
 <!DOCTYPE html>
