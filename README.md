@@ -10,4 +10,3 @@ $ docker build -t ruby_cgi .
 ```
 $ docker run -v $PWD/www:/var/www/html -it -d -p 8080:80 ruby_cgi
 ```
-3. コンテナ内でApache2をスタート
