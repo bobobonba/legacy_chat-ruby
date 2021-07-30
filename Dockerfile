@@ -13,4 +13,4 @@ RUN a2enconf cgi-enabled
 
 EXPOSE 80
 
-ENTRYPOINT [ "/usr/sbin/apache2", "-DFORGROUND" ]
+ENTRYPOINT [ "apachectl", "-DFOREGROUND" ]
