@@ -1,8 +1,8 @@
 #! /usr/bin/ruby
 
-print "Content-type:text/html;charset=UTF-8\n\n"
-
 require 'cgi'
+
+print "Content-type:text/html;charset=UTF-8\n\n"
 
 cgi = CGI.new('html4')
 message = cgi['text_area']
