@@ -17,21 +17,14 @@ EOF
 chat_log = File.open('./log/chat_log.txt', 'r')
 cgi = CGI.new('html4')
 
-latest_log = chat_log.reverse_each.with_index.map do |text, index|
-  if index > 100
-    exit
-  else
-    text
-  end
-end
-
-latest_log.reverse.each do |text|
-  print cgi.div{ text } 
+latest_log = chat_log.to_a.last(100)
+latest_log.each do |text|
+  print cgi.div{ text }
 end
 
 print <<EOF
   <form action="write.cgi" method="get">
-    <input type="text" name="text_area">
+    <input type="text" name="text_area" autofocus>
     <input type="submit" value="書き込む">
   </form> 
 EOF
