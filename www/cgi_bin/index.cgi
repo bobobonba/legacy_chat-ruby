@@ -17,8 +17,8 @@ EOF
 chat_log = File.open('./log/chat_log.txt', 'r')
 cgi = CGI.new('html4')
 
-latest_log = chat_log.to_a.last(100)
-latest_log.each do |text|
+latest_log = `tail -n 100 < ./log/chat_log.txt`
+latest_log.split("\n").each do |text|
   print cgi.div{ text }
 end
 
@@ -26,7 +26,7 @@ print <<EOF
   <form action="write.cgi" method="get">
     <input type="text" name="text_area" autofocus>
     <input type="submit" value="書き込む">
-  </form> 
+  </form>
 EOF
 
 print <<EOF
