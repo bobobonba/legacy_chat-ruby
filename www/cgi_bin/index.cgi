@@ -1,8 +1,10 @@
 #! /usr/bin/ruby
 
 require 'cgi'
+require_relative 'file_utils.rb'
 
 print "Content-Type: text/html; charset=UTF-8\n\n"
+STDERR = STDOUT
 
 print <<EOF 
 <!DOCTYPE html>
@@ -17,8 +19,8 @@ EOF
 chat_log = File.open('./log/chat_log.txt', 'r')
 cgi = CGI.new('html4')
 
-latest_log = `tail -n 100 < ./log/chat_log.txt`
-latest_log.split("\n").each do |text|
+latest_log = tail('./log/chat_log.txt', 100)
+latest_log.each do |text|
   print cgi.div{ text }
 end
 
