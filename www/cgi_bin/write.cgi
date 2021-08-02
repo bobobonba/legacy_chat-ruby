@@ -7,7 +7,9 @@ unless cgi['text_area'].empty?
   message = cgi['text_area']
 
   File.open('./log/chat_log.txt', 'a+'){ |file|
+    file.flock(File::LOCK_EX)
     file.write(message + "\n")
+    file.close
   }
 end
 
