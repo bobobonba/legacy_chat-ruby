@@ -25,9 +25,9 @@ latest_log.each do |text|
 end
 
 print <<EOF
-  <form action="write.cgi" method="get">
+  <form onsubmit="return false;" action="write.cgi" method="post">
     <input type="text" name="text_area" autofocus>
-    <input type="submit" value="書き込む">
+    <input type="button" value="書き込む" onclick="submit(); disabled=true;">
   </form>
 EOF
 
