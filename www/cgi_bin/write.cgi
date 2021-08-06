@@ -1,15 +1,18 @@
 #! /usr/bin/ruby
 
 require 'cgi'
+require 'json'
+
 cgi = CGI.new('html4')
+message = cgi['text_area']
+time = Time.now.to_s
 
-unless cgi['text_area'].empty?
-  message = cgi['text_area']
+json_string = JSON.generate({date: time, text: message})
 
-  File.open('./log/chat_log.txt', 'a+'){ |file|
+unless message.empty?
+  File.open('./log/chat_log.json', 'a+'){ |file|
     file.flock(File::LOCK_EX)
-    file.write(message + "\n")
-    file.close
+    file.write(json_string + "\n")
   }
 end
 

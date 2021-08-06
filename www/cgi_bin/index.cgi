@@ -1,6 +1,7 @@
 #! /usr/bin/ruby
 
 require 'cgi'
+require 'json'
 require_relative 'file_utils.rb'
 
 print "Content-Type: text/html; charset=UTF-8\n\n"
@@ -16,12 +17,16 @@ print <<EOF
   <body>
 EOF
 
-chat_log = File.open('./log/chat_log.txt', 'r')
+chat_log = File.open('./log/chat_log.json', 'r')
 cgi = CGI.new('html4')
 
-latest_log = tail('./log/chat_log.txt', 100)
-latest_log.each do |text|
-  print cgi.div{ text }
+latest_log = tail('./log/chat_log.json', 100)
+latest_log.each do |json|
+  json_hash = JSON.parse(json.to_s)
+
+  print cgi.div{ json_hash['date'].to_s }
+  print cgi.div{ json_hash['text'].to_s }
+  print cgi.br
 end
 
 print <<EOF
